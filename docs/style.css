@@ -42,80 +42,6 @@ main {
     padding: 30px;
 }
 
-.api-key-section {
-    margin-bottom: 25px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-}
-
-.api-key-section label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #333;
-    font-size: 1em;
-}
-
-.api-key-input-wrapper {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.api-key-input {
-    flex: 1;
-    padding: 10px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: 'Courier New', monospace;
-}
-
-.api-key-input:focus {
-    outline: none;
-    border-color: #667eea;
-}
-
-.api-key-status {
-    font-size: 12px;
-    color: #27ae60;
-    font-weight: 600;
-}
-
-.api-key-status.error {
-    color: #e74c3c;
-}
-
-.help-text {
-    display: block;
-    font-size: 12px;
-    color: #666;
-    margin-top: 5px;
-}
-
-.help-text.warning {
-    color: #f39c12;
-    font-weight: 500;
-    margin-top: 8px;
-}
-
-.help-text a {
-    color: #667eea;
-    text-decoration: none;
-}
-
-.help-text a:hover {
-    text-decoration: underline;
-}
-
-.btn-secondary.small {
-    padding: 8px 16px;
-    font-size: 13px;
-}
-
 .input-section {
     margin-bottom: 30px;
 }
@@ -203,11 +129,6 @@ main {
     animation: fadeIn 0.5s;
 }
 
-.response-section {
-    margin-top: 30px;
-    animation: fadeIn 0.5s;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -243,52 +164,6 @@ main {
     color: #333;
     max-height: 500px;
     overflow-y: auto;
-}
-
-.response-box {
-    background: #f8f9fa;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    white-space: pre-wrap;
-    font-size: 15px;
-    line-height: 1.8;
-    color: #333;
-    max-height: 600px;
-    overflow-y: auto;
-    font-family: inherit;
-}
-
-.response-box p {
-    margin-bottom: 12px;
-}
-
-.response-box h1, .response-box h2, .response-box h3 {
-    margin-top: 20px;
-    margin-bottom: 12px;
-    color: #333;
-}
-
-.response-box code {
-    background: #e8e8e8;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9em;
-}
-
-.response-box pre {
-    background: #2d2d2d;
-    color: #f8f8f2;
-    padding: 15px;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin: 15px 0;
-}
-
-.response-box ul, .response-box ol {
-    margin-left: 20px;
-    margin-bottom: 12px;
 }
 
 .actions {
