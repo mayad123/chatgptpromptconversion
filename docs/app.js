@@ -11,6 +11,25 @@ const copyBtn = document.getElementById('copyBtn');
 const copyToChatGPTBtn = document.getElementById('copyToChatGPTBtn');
 const resetBtn = document.getElementById('resetBtn');
 
+// Tab functionality
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+        
+        // Remove active class from all tabs and buttons
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding content
+        button.classList.add('active');
+        document.getElementById(`${targetTab}-tab`).classList.add('active');
+    });
+});
+
+
 // Event listeners
 optimizeBtn.addEventListener('click', handleOptimize);
 copyBtn.addEventListener('click', handleCopy);

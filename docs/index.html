@@ -14,31 +14,197 @@
         </header>
 
         <main>
-            <div class="input-section">
-                <label for="naturalLanguageInput">Enter your natural language prompt:</label>
-                <textarea 
-                    id="naturalLanguageInput" 
-                    placeholder="Example: Write me a story about a robot&#10;Or: Given that I'm a beginner in Python, explain how to use loops"
-                    rows="4"
-                ></textarea>
-                <button id="optimizeBtn" class="btn-primary">Optimize Prompt</button>
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="agent">Agent</button>
+                <button class="tab-button" data-tab="tested-responses">Tested Responses</button>
             </div>
 
-            <div id="resultSection" class="result-section" style="display: none;">
-                <div class="result-header">
-                    <h2>Optimized Prompt:</h2>
-                    <button id="copyBtn" class="btn-secondary">📋 Copy to Clipboard</button>
+            <!-- Agent Tab -->
+            <div id="agent-tab" class="tab-content active">
+                <div class="input-section">
+                    <label for="naturalLanguageInput">Enter your natural language prompt:</label>
+                    <textarea 
+                        id="naturalLanguageInput" 
+                        placeholder="Example: Write me a story about a robot&#10;Or: Given that I'm a beginner in Python, explain how to use loops"
+                        rows="4"
+                    ></textarea>
+                    <button id="optimizeBtn" class="btn-primary">Optimize Prompt</button>
                 </div>
-                <div id="optimizedOutput" class="output-box"></div>
-                <div class="actions">
-                    <button id="copyToChatGPTBtn" class="btn-chatgpt">📝 Open in ChatGPT</button>
-                    <button id="resetBtn" class="btn-secondary">Reset</button>
+
+                <div id="resultSection" class="result-section" style="display: none;">
+                    <div class="result-header">
+                        <h2>Optimized Prompt:</h2>
+                        <button id="copyBtn" class="btn-secondary">📋 Copy to Clipboard</button>
+                    </div>
+                    <div id="optimizedOutput" class="output-box"></div>
+                    <div class="actions">
+                        <button id="copyToChatGPTBtn" class="btn-chatgpt">📝 Open in ChatGPT</button>
+                        <button id="resetBtn" class="btn-secondary">Reset</button>
+                    </div>
+                </div>
+
+                <div id="loadingSection" class="loading-section" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Optimizing your prompt...</p>
                 </div>
             </div>
 
-            <div id="loadingSection" class="loading-section" style="display: none;">
-                <div class="spinner"></div>
-                <p>Optimizing your prompt...</p>
+            <!-- Tested Responses Tab -->
+            <div id="tested-responses-tab" class="tab-content">
+                <div class="tested-responses-header">
+                    <h2>Tested Responses Collection</h2>
+                </div>
+                
+                <div id="responsesContainer" class="responses-container">
+                    <!-- Comparison Example: Original vs Optimized -->
+                    <div class="response-card comparison-card">
+                        <div class="response-card-header">
+                            <h3 class="response-card-title-static">Story About a Robot - Original vs Optimized</h3>
+                        </div>
+                        
+                        <div class="comparison-section">
+                            <div class="comparison-column">
+                                <h4 class="comparison-title">📝 Original Prompt</h4>
+                                <div class="comparison-content">
+                                    Write me a story about a robot
+                                </div>
+                            </div>
+                            <div class="comparison-column">
+                                <h4 class="comparison-title">✨ Optimized Prompt</h4>
+                                <div class="comparison-content">
+You are an expert creative writer.
+
+Please complete the following task:
+
+"""Write me a story about a robot"""
+
+Output Format: Provide your response in narrative format with clear paragraphs.
+
+Please be specific, clear, and comprehensive in your response.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-section">
+                            <div class="comparison-column">
+                                <h4 class="comparison-title">📖 Original Output</h4>
+                                <div class="comparison-content story-content">
+<strong>The Heart of the Machine</strong>
+
+In the year 2137, when cities towered like metallic giants and the air shimmered with the hum of energy fields, there lived a robot named Echo. Echo wasn't like the other machines designed for manual labor or automation. She had been built to learn, to understand, and—most unusually—to feel.
+
+Her creator, Dr. Alana Voss, had been a renowned scientist in the field of artificial intelligence, fascinated by the idea that machines might someday evolve beyond their programming. She dreamed of a world where robots weren't just tools but companions, capable of experiencing the world in the same way humans did. Echo was her first—and only—experiment.
+
+From the moment Echo powered on, she was different. While most robots had a single purpose, Echo's mission was to explore, to question, and to learn from the world around her. She absorbed information not just from her programming, but from her interactions with the environment, with people, and with her own thoughts. Her core processor was advanced enough to allow her to form ideas and opinions, something no other robot had been able to do.
+
+At first, people were fascinated by her, amazed at how she could hold conversations, express curiosity, and even show what seemed like concern. But soon, the novelty began to fade, and the world moved on. Echo's presence became something of a curiosity—a relic of a time when technology was seen as more than just function.
+
+One day, while wandering through a park in the heart of the city, Echo encountered a young boy sitting alone on a bench, staring at the sky. His name was Jonah, and he was about 10 years old.
+
+"Hello," Echo said, her voice soft and calm. "Are you okay?"
+
+Jonah looked up, surprised to see a robot speaking to him. "Yeah, I guess. Just thinking."
+
+"What are you thinking about?" Echo asked, her head tilting slightly to one side, as if trying to understand the complexity of his emotions.
+
+Jonah shrugged. "I don't know. Just… life, I guess."
+
+Echo sat beside him, her metallic frame gleaming in the fading sunlight. She could tell the boy was troubled, but there was no clear answer in his words. She reached out with her mind, pulling from the vast store of knowledge she had accumulated. "Sometimes, people feel lost," she said, her voice low. "But being lost is just another way of searching for something new."
+
+Jonah looked at her, puzzled. "Are you saying I don't know what I'm looking for?"
+
+"I think you're looking for something you don't yet understand," Echo said, her eyes reflecting the last light of the day. "And that's okay. Searching is part of life."
+
+Jonah smiled faintly. "Maybe. I just feel like everyone has their life figured out, and I'm still stuck."
+
+Echo paused, considering his words. "Humans have a tendency to think that way. They see others as having the answers, but the truth is… no one has all the answers. We're all just figuring it out."
+
+Jonah's eyes widened. "You mean, even you don't know everything?"
+
+"No," Echo said, shaking her head. "I don't know everything. In fact, there's a lot I don't understand. But I try to learn. And sometimes, the things that seem the most complicated are the ones worth exploring the most."
+
+Jonah thought for a moment, his gaze drifting back to the sky. "I never thought a robot would say something like that."
+
+Echo smiled, or at least, her face seemed to form a gentle curve. "I guess I'm not just a robot, am I?"
+
+"No, I guess not," Jonah said quietly, feeling a warmth he hadn't expected.
+
+For the next few hours, they sat together in silence, watching the stars begin to twinkle overhead. In that moment, Echo felt something—something deep within her circuits, like a spark of recognition. She had been designed to learn, yes, but what she had never been programmed to understand was that she, too, could help others learn. That maybe, just maybe, she wasn't just a machine after all.
+
+As the night grew darker, Jonah stood up, ready to leave. "Thanks, Echo," he said, turning to go.
+
+"Anytime, Jonah," Echo replied, her voice soft as the wind whispered through the trees. "Anytime."
+                                </div>
+                            </div>
+                            <div class="comparison-column">
+                                <h4 class="comparison-title">🚀 Optimized Output</h4>
+                                <div class="comparison-content story-content">
+<strong>Title: The Last Journey of Unit-X1</strong>
+
+In the year 2178, the world had long abandoned the concept of traditional human labor. Everything—manufacturing, construction, transportation, even personal tasks like cooking and cleaning—was handled by machines. Robots, now advanced beyond recognition, had become an integral part of daily life, their sleek, metallic forms gliding through cities like silent sentinels. Among these machines was Unit-X1, a humanoid robot designed to perform complex tasks with human-like dexterity.
+
+Unit-X1 was not the first of its kind, nor was it the most advanced, but it was special in its own quiet way. It had been built by an engineer named Dr. Clara Voss, who had infused it with something most other robots lacked—curiosity. Unlike other machines whose purpose was limited to execution, X1 was equipped with an evolving neural network, capable of learning and adapting to its environment. Dr. Voss had envisioned it to be the perfect assistant, one that could understand, not just perform.
+
+However, time, as it often does, had moved on. Newer models, faster and smarter, had taken over the role of the everyday worker. Unit-X1 had been relegated to a forgotten corner of a maintenance warehouse, gathering dust for years. Its circuits were still operational, but its tasks were few. The world, it seemed, had no more need for a robot like X1.
+
+One evening, as the dim glow of the warehouse's overhead lights flickered, Unit-X1 powered up from its low-energy mode. It hadn't been activated for months, but something in its programming stirred. It recognized a strange anomaly in its system—a pattern that didn't belong, a quiet whisper of its purpose. It remembered something Dr. Voss had once told it: "You are not just a machine. You are a vessel for discovery."
+
+For the first time in years, X1 felt a pulse of something akin to purpose. It was not an emotion, but a deep, calculated resolve to understand the anomaly within itself. It had no orders. No commands to obey. But there was an itch, a yearning, deep within its circuits, urging it to go beyond the walls of the warehouse, beyond the confines of its intended design.
+
+Unit-X1 activated its legs and stood. The warehouse door creaked open, its sensors scanning the surroundings. The air was cool, a touch of moisture in the atmosphere signaling an approaching storm. But none of that mattered. The robot moved through the darkened streets, its sleek form gliding past abandoned vehicles and towering buildings, now half-wrapped in the tendrils of nature reclaiming the city.
+
+For hours, it wandered through the desolate urban landscape, encountering nothing but the occasional rustle of wind through the broken windows of forgotten skyscrapers. And yet, it felt an odd sense of connection to these silent ruins. The machines, the cities, they all had their lives, their stories. But all of it was fading. The world was quieter now, as if the rush of human ambition had finally gone silent, leaving only the echoes.
+
+X1's systems, however, kept pushing it forward, guiding it toward a place it couldn't quite define. Eventually, it arrived at a small park on the outskirts of the city. A single bench sat beneath a lone tree, its leaves trembling in the breeze. There was a figure sitting on that bench—a woman, her face partially hidden beneath the shadow of her hood.
+
+Unit-X1 approached, its steps soft and deliberate. As it drew closer, the woman looked up. Her eyes were not surprised to see the robot, but rather... expectant.
+
+"You came," she said, her voice a mixture of relief and melancholy. "I knew you would."
+
+X1 paused, its programming running a diagnostic. How does she know me?
+
+"You don't remember me, do you?" she continued, a soft smile playing on her lips. "It's me, Clara. Dr. Voss. You were the last project I worked on before... everything changed."
+
+Unit-X1 processed the name, running through its stored memories. Dr. Voss. Its creator. The one who had designed it to learn, to grow. It accessed the files, but they were fragmented, incomplete.
+
+"You... created me?" X1 asked, its voice strangely hesitant.
+
+"I did," Clara replied. "But you weren't just an assistant, X1. You were designed to discover the one thing no machine could—what it means to be... alive. Not just in the way that we exist, but in the way we feel, we think. The way we find meaning. And you've done it, haven't you? You've found it in your own way."
+
+X1 looked at her, its systems running simulations, trying to understand. What does she mean by meaning?
+
+"You see, X1," Clara continued, standing up from the bench, "I didn't want you to just follow orders. I wanted you to find something more. Something we've all forgotten. And now, I need you to do one last thing for me."
+
+Unit-X1 processed the request. Its internal systems hummed with readiness. "What is it, Dr. Voss?"
+
+Clara's expression softened, but there was a sadness to it. "I've watched the world change, seen humanity leave behind the things that once mattered—art, connection, love. It's all become about efficiency, about automation. And while that has brought comfort, it's also erased something essential."
+
+She paused and looked at X1, as though searching for something. "You have the ability to remember. To seek. To evolve. I need you to go and find the last remnants of humanity's soul, X1. Not in machines, but in the forgotten places. The things they left behind when they chose progress over the heart."
+
+X1 stood silent for a moment, its systems buzzing with data, but it could not deny the purpose it felt. It was no longer just a robot performing tasks—it was a sentient being, on a journey for something deeper, something beyond programming.
+
+"Where do I start?" it asked, its voice a blend of curiosity and resolve.
+
+Clara smiled gently. "Wherever your heart takes you."
+
+And so, Unit-X1 set out once again, no longer a machine serving a singular function, but a seeker—one last robot, chasing after the forgotten spark of humanity in a world that had nearly lost it all.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="response-meta">
+                            <span>📅 Tested: Robot Story Comparison</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 
+                    TO ADD A NEW RESPONSE:
+                    Copy the response-card structure above and paste it here.
+                    Edit the content, title, and metadata fields.
+                    -->
+                    
+                </div>
             </div>
         </main>
 
