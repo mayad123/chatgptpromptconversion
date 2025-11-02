@@ -14,6 +14,22 @@
         </header>
 
         <main>
+            <div class="api-key-section">
+                <label for="apiKeyInput">OpenAI API Key (optional - stored locally):</label>
+                <div class="api-key-input-wrapper">
+                    <input 
+                        type="password" 
+                        id="apiKeyInput" 
+                        placeholder="sk-..." 
+                        class="api-key-input"
+                    >
+                    <button id="saveApiKeyBtn" class="btn-secondary small">Save</button>
+                    <span id="apiKeyStatus" class="api-key-status"></span>
+                </div>
+                <small class="help-text">Your API key is stored only in your browser. <a href="https://platform.openai.com/api-keys" target="_blank">Get your API key</a></small>
+                <small class="help-text warning">⚠️ Note: Direct browser requests may be blocked by CORS. If you encounter errors, you may need a backend proxy or browser extension that enables CORS.</small>
+            </div>
+
             <div class="input-section">
                 <label for="naturalLanguageInput">Enter your natural language prompt:</label>
                 <textarea 
@@ -31,14 +47,23 @@
                 </div>
                 <div id="optimizedOutput" class="output-box"></div>
                 <div class="actions">
+                    <button id="getResponseBtn" class="btn-chatgpt">🤖 Get ChatGPT Response</button>
                     <button id="copyToChatGPTBtn" class="btn-chatgpt">📝 Open in ChatGPT</button>
                     <button id="resetBtn" class="btn-secondary">Reset</button>
                 </div>
             </div>
 
+            <div id="responseSection" class="response-section" style="display: none;">
+                <div class="result-header">
+                    <h2>ChatGPT Response:</h2>
+                    <button id="copyResponseBtn" class="btn-secondary">📋 Copy Response</button>
+                </div>
+                <div id="chatGptResponse" class="response-box"></div>
+            </div>
+
             <div id="loadingSection" class="loading-section" style="display: none;">
                 <div class="spinner"></div>
-                <p>Optimizing your prompt...</p>
+                <p id="loadingText">Optimizing your prompt...</p>
             </div>
         </main>
 
