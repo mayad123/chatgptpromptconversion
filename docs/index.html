@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Prompt Optimizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 ChatGPT Prompt Optimizer</h1>
+            <p class="subtitle">Transform your natural language into optimized prompts using OpenAI's best practices</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <label for="naturalLanguageInput">Enter your natural language prompt:</label>
+                <textarea 
+                    id="naturalLanguageInput" 
+                    placeholder="Example: Write me a story about a robot&#10;Or: Given that I'm a beginner in Python, explain how to use loops"
+                    rows="4"
+                ></textarea>
+                <button id="optimizeBtn" class="btn-primary">Optimize Prompt</button>
+            </div>
+
+            <div id="resultSection" class="result-section" style="display: none;">
+                <div class="result-header">
+                    <h2>Optimized Prompt:</h2>
+                    <button id="copyBtn" class="btn-secondary">📋 Copy to Clipboard</button>
+                </div>
+                <div id="optimizedOutput" class="output-box"></div>
+                <div class="actions">
+                    <button id="copyToChatGPTBtn" class="btn-chatgpt">📝 Open in ChatGPT</button>
+                    <button id="resetBtn" class="btn-secondary">Reset</button>
+                </div>
+            </div>
+
+            <div id="loadingSection" class="loading-section" style="display: none;">
+                <div class="spinner"></div>
+                <p>Optimizing your prompt...</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with OpenAI's reasoning best practices</p>
+            <p><a href="https://github.com/mayad123/chatgptpromptconversion" target="_blank">View on GitHub</a></p>
+        </footer>
+    </div>
+
+    <script src="prompt-optimizer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
