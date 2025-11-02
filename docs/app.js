@@ -70,15 +70,59 @@ function handleCopy() {
 function handleCopyToChatGPT() {
     const text = optimizedOutput.textContent;
     
-    // Copy to clipboard first
-    navigator.clipboard.writeText(text).then(() => {
-        // Open ChatGPT in a new tab
-        window.open('https://chat.openai.com', '_blank');
-        showToast('✅ Prompt copied! Opening ChatGPT...', 'success');
-    }).catch(err => {
-        console.error('Failed to copy:', err);
-        showToast('Failed to copy. Please copy manually.', 'error');
-    });
+    if (!text) {
+        showToast('Please optimize a prompt first', 'error');
+        return;
+    }
+    
+    // Copy to clipboard first - ensure it works
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        // Modern clipboard API
+        navigator.clipboard.writeText(text).then(() => {
+            // Small delay to ensure clipboard is ready
+            setTimeout(() => {
+                // Open ChatGPT in a new tab
+                window.open('https://chat.openai.com', '_blank');
+                showToast('✅ Prompt copied to clipboard! Opening ChatGPT...', 'success');
+            }, 150);
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            // Fallback: try old method
+            fallbackCopyTextToClipboard(text);
+        });
+    } else {
+        // Fallback for older browsers
+        fallbackCopyTextToClipboard(text);
+    }
+}
+
+// Fallback copy method for browsers without clipboard API
+function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            setTimeout(() => {
+                window.open('https://chat.openai.com', '_blank');
+                showToast('✅ Prompt copied to clipboard! Opening ChatGPT...', 'success');
+            }, 150);
+        } else {
+            showToast('Copy failed. Please use the Copy button, then open ChatGPT manually.', 'error');
+        }
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
+        showToast('Copy failed. Please use the Copy button, then open ChatGPT manually.', 'error');
+    } finally {
+        document.body.removeChild(textArea);
+    }
 }
 
 function handleReset() {
