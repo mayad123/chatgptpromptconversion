@@ -70,8 +70,3 @@ ChatGPTPromptOptimization/
 ├── requirements.txt
 └── main.py
 ```
-
-## License
-
-MIT
-
