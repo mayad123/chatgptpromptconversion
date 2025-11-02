@@ -81,9 +81,29 @@ class NaturalLanguageParser:
             match = re.search(pattern, text_lower, re.IGNORECASE)
             if match:
                 intent = match.group(1).strip()
-                # Clean up the intent
+                
+                # Remove pronouns and unnecessary words at the start
+                # Remove "me", "us", "you" if they appear right after the action verb
+                intent = re.sub(r'^(me|us|you|for\s+me|for\s+us)\s+', '', intent, flags=re.IGNORECASE)
+                
+                # Clean up articles
                 intent = re.sub(r'^(a|an|the)\s+', '', intent, flags=re.IGNORECASE)
-                return intent
+                
+                # If intent is too short or just "me", try to get more context
+                if len(intent.split()) <= 2 and "me" in intent.lower():
+                    # Try alternative patterns
+                    alt_patterns = [
+                        r"(?:write|create|generate|make|build|develop)\s+(?:me\s+)?(?:a\s+)?(.+?)(?:\.|$)",
+                        r"(?:write|create|generate|make|build|develop)\s+(.+?)(?:\.|$)",
+                    ]
+                    for alt_pattern in alt_patterns:
+                        alt_match = re.search(alt_pattern, text_lower, re.IGNORECASE)
+                        if alt_match:
+                            intent = alt_match.group(1).strip()
+                            intent = re.sub(r'^(me|us|you|for\s+me|for\s+us|a|an|the)\s+', '', intent, flags=re.IGNORECASE)
+                            break
+                
+                return intent.strip()
         
         # If no pattern matches, use the original text as intent
         return text
@@ -98,16 +118,23 @@ class NaturalLanguageParser:
         Returns:
             Extracted context string
         """
-        # Look for context indicators
+        # Look for context indicators - improved patterns
         context_patterns = [
-            r"(?:given|assuming|for|in)\s+(.+?)(?:,|\.|$)",
+            r"given\s+(?:that\s+)?(.+?)(?:,|\.|\s+explain|\s+write|\s+create)",
+            r"assuming\s+(?:that\s+)?(.+?)(?:,|\.|\s+explain|\s+write|\s+create)",
+            r"for\s+(?:a\s+)?(.+?)(?:,|\.|\s+write|\s+create|\s+explain)",
             r"(?:context|background|situation):\s*(.+?)(?:\.|$)",
+            r"as\s+(?:a\s+)?(.+?)(?:,|\.|\s+explain|\s+write)",
         ]
         
         for pattern in context_patterns:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
-                return match.group(1).strip()
+                context = match.group(1).strip()
+                # Clean up common prefixes
+                context = re.sub(r'^(a|an|the)\s+', '', context, flags=re.IGNORECASE)
+                if len(context) > 3:  # Only return if meaningful
+                    return context
         
         return ""
     
@@ -152,17 +179,31 @@ class NaturalLanguageParser:
         Returns:
             Output format string
         """
-        format_keywords = [
-            "format", "structure", "style", "type", "form",
-            "json", "xml", "markdown", "html", "csv", "list", "table"
+        text_lower = text.lower()
+        
+        # Direct format mentions (json, markdown, etc.)
+        direct_formats = ["json", "xml", "markdown", "html", "csv", "yaml"]
+        for fmt in direct_formats:
+            if fmt in text_lower:
+                # Check if it's about output format, not just mentioned
+                format_pattern = rf"(?:in|as|with|using)\s+(?:a|an)?\s*{fmt}"
+                if re.search(format_pattern, text_lower):
+                    return fmt
+        
+        # Format type patterns
+        format_patterns = [
+            r"(?:in|as|with|using)\s+(?:a|an)?\s*(?:output\s+)?(?:format|structure|style|type|form)\s+(?:of\s+)?(.+?)(?:\.|$)",
+            r"(?:format|structure|style)\s*:\s*(.+?)(?:\.|$)",
         ]
         
-        text_lower = text.lower()
-        for keyword in format_keywords:
-            pattern = rf"(?:in|as|with|using)\s+(?:a|an)?\s*{keyword}\s+(?:of\s+)?(.+?)(?:\.|$)"
+        for pattern in format_patterns:
             match = re.search(pattern, text_lower)
             if match:
-                return match.group(1).strip()
+                format_desc = match.group(1).strip()
+                # Remove "format" if it's just "format format"
+                if format_desc.lower() == "format":
+                    continue
+                return format_desc
         
         return ""
 
